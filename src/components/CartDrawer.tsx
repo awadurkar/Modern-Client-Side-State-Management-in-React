@@ -1,12 +1,8 @@
 import CartItemsList from './CartItemsList';
-import type { CartItem } from '../types';
+import { useCartState } from '../context/CartContext';
 
-interface CartDrawerProps {
-  items: CartItem[];
-  onRemove: (productId: string) => void;
-}
-
-function CartDrawer({ items, onRemove }: CartDrawerProps) {
+function CartDrawer() {
+  const items = useCartState();
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const itemCount = items.reduce((count, item) => count + item.quantity, 0);
 
@@ -20,7 +16,7 @@ function CartDrawer({ items, onRemove }: CartDrawerProps) {
         <span className="cart-line-count">{itemCount.toString().padStart(2, '0')}</span>
       </div>
 
-      <CartItemsList items={items} onRemove={onRemove} />
+      <CartItemsList items={items} />
 
       <div className="cart-summary">
         <div className="subtotal-row">

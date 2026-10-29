@@ -17,11 +17,7 @@ function isProductList(value: unknown): value is Product[] {
   );
 }
 
-interface CatalogProps {
-  onAddToCart: (product: Product) => void;
-}
-
-function Catalog({ onAddToCart }: CatalogProps) {
+function Catalog() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -88,7 +84,6 @@ function Catalog({ onAddToCart }: CatalogProps) {
               key={product.id}
               product={product}
               index={index}
-              onAddToCart={onAddToCart}
             />
           ))}
         </div>
