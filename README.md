@@ -1,10 +1,9 @@
 # ShopCart — Modern Client-Side State Management in React
 
-ShopCart is a React + TypeScript storefront foundation built with Vite. This
-baseline includes a product catalog served by a local json-server API, shared
-domain types, and the initial catalog/cart UI. The cart currently uses local
-component state; the Context, Zustand, Jotai, and XState implementations are
-developed in their respective assignment branches.
+ShopCart is a React + TypeScript storefront built with Vite. On the
+`deliverable-2-zustand` branch, cart state and checkout status are managed by a
+typed Zustand store. Cart totals are derived from the item list, and checkout
+submits an order to the local mock API.
 
 ## Requirements
 

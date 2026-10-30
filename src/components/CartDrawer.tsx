@@ -1,14 +1,18 @@
 import CartItemsList from './CartItemsList';
-import type { CartItem } from '../types';
+import { useCartStore } from '../store/cartStore';
 
-interface CartDrawerProps {
-  items: CartItem[];
-  onRemove: (productId: string) => void;
-}
-
-function CartDrawer({ items, onRemove }: CartDrawerProps) {
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const itemCount = items.reduce((count, item) => count + item.quantity, 0);
+function CartDrawer() {
+  const itemCount = useCartStore((state) =>
+    state.items.reduce((count, item) => count + item.quantity, 0),
+  );
+  const total = useCartStore((state) =>
+    state.items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+  );
+  const hasItems = useCartStore((state) => state.items.length > 0);
+  const checkoutStatus = useCartStore((state) => state.checkoutStatus);
+  const checkoutError = useCartStore((state) => state.checkoutError);
+  const lastOrderId = useCartStore((state) => state.lastOrder?.id ?? null);
+  const checkout = useCartStore((state) => state.checkout);
 
   return (
     <aside className="cart-drawer" id="cart" aria-labelledby="cart-title">
@@ -20,7 +24,7 @@ function CartDrawer({ items, onRemove }: CartDrawerProps) {
         <span className="cart-line-count">{itemCount.toString().padStart(2, '0')}</span>
       </div>
 
-      <CartItemsList items={items} onRemove={onRemove} />
+      <CartItemsList />
 
       <div className="cart-summary">
         <div className="subtotal-row">
@@ -28,8 +32,17 @@ function CartDrawer({ items, onRemove }: CartDrawerProps) {
           <span>${total.toFixed(2)}</span>
         </div>
         <p className="shipping-note">Shipping and taxes calculated at checkout.</p>
-        <button className="checkout-button" type="button" disabled={items.length === 0}>
-          <span>Continue to checkout</span>
+        {checkoutError && <p className="checkout-error" role="alert">{checkoutError}</p>}
+        {checkoutStatus === 'success' && (
+          <p className="checkout-success" role="status">Order {lastOrderId} placed successfully.</p>
+        )}
+        <button
+          className="checkout-button"
+          type="button"
+          disabled={!hasItems || checkoutStatus === 'submitting'}
+          onClick={() => void checkout()}
+        >
+          <span>{checkoutStatus === 'submitting' ? 'Placing order...' : 'Continue to checkout'}</span>
           <span aria-hidden="true">↗</span>
         </button>
         <p className="secure-note"><span aria-hidden="true">✳</span> CONSIDERED GOODS, CONSCIOUSLY MADE</p>
