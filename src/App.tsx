@@ -7,35 +7,12 @@ function App() {
     <div className="app-shell">
       <Header />
       <main className="page-content">
-        <section className="welcome-panel" aria-labelledby="page-title">
-          <div className="welcome-copy">
-            <p className="eyebrow">THE EVERYDAY EDIT</p>
-            <h1 id="page-title">Make room for<br />better work.</h1>
-            <p className="welcome-description">
-              Thoughtful tools for your desk, picked to make every day feel a
-              little more considered.
-            </p>
-            <a className="text-link" href="#catalog">Explore the collection <span aria-hidden="true">↓</span></a>
-          </div>
-          <div className="welcome-art" aria-hidden="true">
-            <div className="art-sun" />
-            <div className="art-ring" />
-            <div className="art-keyboard">
-              <span /><span /><span /><span /><span /><span /><span /><span /><span />
-            </div>
-            <span className="art-caption">DESK ESSENTIALS / Nº 04</span>
-          </div>
-        </section>
 
         <div className="shop-layout" id="catalog">
           <Catalog />
           <CartDrawer />
         </div>
 
-        <footer className="page-footer" id="about">
-          <span>SHOPCART — GOOD THINGS, WELL MADE.</span>
-          <span>BUILT FOR THE WAY YOU WORK.</span>
-        </footer>
       </main>
     </div>
   );

@@ -15,8 +15,6 @@ function Header() {
 function Toolbar() {
   return (
     <nav className="toolbar" aria-label="Main navigation">
-      <a href="#catalog">Shop all</a>
-      <a href="#about">Our approach</a>
       <a className="cart-nav" href="#cart">
         Bag <CartBadge />
       </a>
