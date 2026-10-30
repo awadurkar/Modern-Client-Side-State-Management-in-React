@@ -1,11 +1,13 @@
 import type { CartItem } from '../types';
+import { useCartDispatch } from '../context/CartContext';
 
 interface CartItemsListProps {
   items: CartItem[];
-  onRemove: (productId: string) => void;
 }
 
-function CartItemsList({ items, onRemove }: CartItemsListProps) {
+function CartItemsList({ items }: CartItemsListProps) {
+  const dispatch = useCartDispatch();
+
   if (items.length === 0) {
     return (
       <div className="cart-empty">
@@ -26,7 +28,11 @@ function CartItemsList({ items, onRemove }: CartItemsListProps) {
           <div className="cart-item-info">
             <h3>{item.name}</h3>
             <p>QTY {item.quantity.toString().padStart(2, '0')}</p>
-            <button type="button" className="remove-button" onClick={() => onRemove(item.id)}>
+            <button
+              type="button"
+              className="remove-button"
+              onClick={() => dispatch({ type: 'remove', productId: item.id })}
+            >
               Remove
             </button>
           </div>

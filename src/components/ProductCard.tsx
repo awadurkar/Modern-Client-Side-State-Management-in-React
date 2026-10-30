@@ -1,14 +1,15 @@
 import type { Product } from '../types';
+import { useCartDispatch } from '../context/CartContext';
 
 interface ProductCardProps {
   product: Product;
   index: number;
-  onAddToCart: (product: Product) => void;
 }
 
 const productNotes = ['TACTILE BY DESIGN', 'MADE FOR LONG DAYS', 'LESS, BUT BETTER', 'A SOFTER GLOW'];
 
-function ProductCard({ product, index, onAddToCart }: ProductCardProps) {
+function ProductCard({ product, index }: ProductCardProps) {
+  const dispatch = useCartDispatch();
   const number = (index + 1).toString().padStart(2, '0');
 
   return (
@@ -25,7 +26,11 @@ function ProductCard({ product, index, onAddToCart }: ProductCardProps) {
         </div>
         <span className="product-price">${product.price.toFixed(2)}</span>
       </div>
-      <button className="add-button" type="button" onClick={() => onAddToCart(product)}>
+      <button
+        className="add-button"
+        type="button"
+        onClick={() => dispatch({ type: 'add', product })}
+      >
         Add to bag <span aria-hidden="true">+</span>
       </button>
     </article>
