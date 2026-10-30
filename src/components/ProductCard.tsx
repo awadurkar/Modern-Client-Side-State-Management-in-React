@@ -1,14 +1,15 @@
 import type { Product } from '../types';
+import { useCartStore } from '../store/cartStore';
 
 interface ProductCardProps {
   product: Product;
   index: number;
-  onAddToCart: (product: Product) => void;
 }
 
 const productNotes = ['TACTILE BY DESIGN', 'MADE FOR LONG DAYS', 'LESS, BUT BETTER', 'A SOFTER GLOW'];
 
-function ProductCard({ product, index, onAddToCart }: ProductCardProps) {
+function ProductCard({ product, index }: ProductCardProps) {
+  const addItem = useCartStore((state) => state.addItem);
   const number = (index + 1).toString().padStart(2, '0');
 
   return (
@@ -25,7 +26,7 @@ function ProductCard({ product, index, onAddToCart }: ProductCardProps) {
         </div>
         <span className="product-price">${product.price.toFixed(2)}</span>
       </div>
-      <button className="add-button" type="button" onClick={() => onAddToCart(product)}>
+      <button className="add-button" type="button" onClick={() => addItem(product)}>
         Add to bag <span aria-hidden="true">+</span>
       </button>
     </article>

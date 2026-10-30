@@ -365,6 +365,21 @@ a {
   line-height: 1.4;
 }
 
+.checkout-error,
+.checkout-success {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.checkout-error {
+  color: #8d3028;
+}
+
+.checkout-success {
+  color: var(--accent);
+}
+
 .checkout-button {
   width: 100%;
   padding: 10px;
