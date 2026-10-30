@@ -135,9 +135,9 @@ a {
 
 .shop-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
+  grid-template-columns: minmax(0, 1fr) 250px 250px;
   align-items: start;
-  gap: 28px;
+  gap: 20px;
   padding-top: 22px;
 }
 
@@ -253,6 +253,59 @@ a {
   padding: 14px;
   border: 1px solid var(--border);
   border-radius: 4px;
+}
+
+.payment-panel {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.payment-panel h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.payment-status {
+  min-height: 36px;
+  margin: 10px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.payment-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.payment-submit-button,
+.payment-cancel-button {
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.payment-submit-button {
+  background: var(--accent);
+  color: #fff;
+}
+
+.payment-submit-button:hover:not(:disabled) {
+  background: #244631;
+}
+
+.payment-submit-button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.payment-cancel-button {
+  border: 1px solid var(--border);
+  background: #fff;
 }
 
 .cart-heading {
@@ -420,10 +473,24 @@ a {
   font-size: 10px;
 }
 
+@media (max-width: 900px) {
+  .shop-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  }
+
+  .payment-panel {
+    grid-column: 2;
+  }
+}
+
 @media (max-width: 700px) {
   .shop-layout {
     grid-template-columns: 1fr;
     gap: 22px;
+  }
+
+  .payment-panel {
+    grid-column: auto;
   }
 }
 
