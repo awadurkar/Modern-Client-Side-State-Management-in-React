@@ -1,8 +1,9 @@
-interface CartBadgeProps {
-  itemCount: number;
-}
+import { useAtomValue } from 'jotai';
+import { cartItemCountAtom } from '../atoms/cartAtoms';
 
-function CartBadge({ itemCount }: CartBadgeProps) {
+function CartBadge() {
+  const itemCount = useAtomValue(cartItemCountAtom);
+
   return (
     <span className="cart-badge" aria-label={`${itemCount} items in bag`}>
       {itemCount.toString().padStart(2, '0')}

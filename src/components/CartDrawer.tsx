@@ -1,14 +1,10 @@
+import { useAtomValue } from 'jotai';
 import CartItemsList from './CartItemsList';
-import type { CartItem } from '../types';
+import { cartItemCountAtom, cartTotalAtom } from '../atoms/cartAtoms';
 
-interface CartDrawerProps {
-  items: CartItem[];
-  onRemove: (productId: string) => void;
-}
-
-function CartDrawer({ items, onRemove }: CartDrawerProps) {
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const itemCount = items.reduce((count, item) => count + item.quantity, 0);
+function CartDrawer() {
+  const itemCount = useAtomValue(cartItemCountAtom);
+  const total = useAtomValue(cartTotalAtom);
 
   return (
     <aside className="cart-drawer" id="cart" aria-labelledby="cart-title">
@@ -20,7 +16,7 @@ function CartDrawer({ items, onRemove }: CartDrawerProps) {
         <span className="cart-line-count">{itemCount.toString().padStart(2, '0')}</span>
       </div>
 
-      <CartItemsList items={items} onRemove={onRemove} />
+      <CartItemsList />
 
       <div className="cart-summary">
         <div className="subtotal-row">
@@ -28,7 +24,7 @@ function CartDrawer({ items, onRemove }: CartDrawerProps) {
           <span>${total.toFixed(2)}</span>
         </div>
         <p className="shipping-note">Shipping and taxes calculated at checkout.</p>
-        <button className="checkout-button" type="button" disabled={items.length === 0}>
+        <button className="checkout-button" type="button" disabled={itemCount === 0}>
           <span>Continue to checkout</span>
           <span aria-hidden="true">↗</span>
         </button>

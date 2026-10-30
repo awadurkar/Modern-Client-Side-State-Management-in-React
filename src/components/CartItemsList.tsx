@@ -1,11 +1,11 @@
+import { useAtomValue, useSetAtom } from 'jotai';
 import type { CartItem } from '../types';
+import { cartItemsAtom, removeCartItemAtom } from '../atoms/cartAtoms';
 
-interface CartItemsListProps {
-  items: CartItem[];
-  onRemove: (productId: string) => void;
-}
+function CartItemsList() {
+  const items: CartItem[] = useAtomValue(cartItemsAtom);
+  const removeCartItem = useSetAtom(removeCartItemAtom);
 
-function CartItemsList({ items, onRemove }: CartItemsListProps) {
   if (items.length === 0) {
     return (
       <div className="cart-empty">
@@ -26,7 +26,11 @@ function CartItemsList({ items, onRemove }: CartItemsListProps) {
           <div className="cart-item-info">
             <h3>{item.name}</h3>
             <p>QTY {item.quantity.toString().padStart(2, '0')}</p>
-            <button type="button" className="remove-button" onClick={() => onRemove(item.id)}>
+            <button
+              type="button"
+              className="remove-button"
+              onClick={() => removeCartItem(item.id)}
+            >
               Remove
             </button>
           </div>
