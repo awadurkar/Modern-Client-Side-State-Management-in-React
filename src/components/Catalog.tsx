@@ -63,7 +63,6 @@ function Catalog({ onAddToCart }: CatalogProps) {
     <section className="catalog" aria-labelledby="catalog-title">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">CURATED FOR YOUR DESK</p>
           <h2 id="catalog-title">The collection<span className="heading-period">.</span></h2>
         </div>
         <span className="product-count">
